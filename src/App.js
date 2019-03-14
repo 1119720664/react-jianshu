@@ -5,10 +5,11 @@ import Index from "./components/index/index"
 import Detail from "./components/detail/detail"
 import Login from "./components/login/login"
 import Write from "./components/auth/auth"
-import { BrowserRouter, Route ,Switch} from "react-router-dom"
+import Mouth from "./components/mouth/mouth"
+import Wrapper from "./components/wrapper/wrapper"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 import { Provider } from "react-redux"
 import store from "./store/store"
-
 /*异步加载组件的使用*/
 class App extends Component {
     render() {
@@ -18,15 +19,22 @@ class App extends Component {
                 <Provider store={store}>
                     <Fragment>
                         <BrowserRouter>
-                            <div>
-                                <Header/>
+                            <Wrapper>
                                 <Switch>
-                                    <Route exact path="/" component={Index}/>
-                                    <Route exact path="/login" component={Login}/>
-                                    <Route exact path="/write" component={Write}/>
-                                    <Route exact path="/detail/:id" component={Detail}/>
+                                    <Route path="/mouth" component={Mouth}/>
+                                    <Route path="/" exact render={() => (
+                                        <div>
+                                            <Header/>
+                                            <Switch>
+                                                <Route exact path="/" component={Index}/>
+                                                <Route exact path="/login" component={Login}/>
+                                                <Route exact path="/write" component={Write}/>
+                                                <Route exact path="/detail/:id" component={Detail}/>
+                                            </Switch>
+                                        </div>
+                                    )}/>
                                 </Switch>
-                            </div>
+                            </Wrapper>
                         </BrowserRouter>
                     </Fragment>
                 </Provider>
